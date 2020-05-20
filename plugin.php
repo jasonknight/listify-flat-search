@@ -9,11 +9,10 @@
  * License: GPL2
  */
 namespace ListifyFlatSearch;
-require_once(__DIR__ . '/core.php');
+require_once(__DIR__ . '/core.php');
 require_once(__DIR__ . '/admin.php');
-
 function init() {
-    
+      
 }
 \add_action('init', __NAMESPACE__ . '\init');
 function get_listing_data($p) {
@@ -93,3 +92,6 @@ function get_listing_data($p) {
     $data = apply_filters('listify_flat_search_get_listing_data_end',$data);
     return $data;
 }
+\register_activation_hook(__FILE__, function () {
+
+});

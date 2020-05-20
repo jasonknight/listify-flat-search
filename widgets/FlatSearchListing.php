@@ -23,9 +23,7 @@ class __FlatSearchWP_Query extends \WP_Query {
     }
 
     // whitelist some fields we extended
-    $additional_allowed = array(
-      'last_comment_date',
-    );
+    $additional_allowed = apply_filters('listify_flat_search_allowed_orderbys',[]);
 
     if ( ! in_array( $order_by, $additional_allowed, true ) ) {
       // not allowed column => early exit here
@@ -177,8 +175,9 @@ class FlatSearchListing extends Listify_Widget {
             'post_status' => 'publish',
             'posts_per_page' => 25,
             'paged' => max(1,get_query_var('paged')),
-            'orderby' => 'last_comment_date',
-            'order' => 'desc',
+            'orderby' => apply_filters('listify_flat_search_orderby', [
+                  'post_modified' => 'DESC',
+            ]),
             'tax_query' => [],
             'meta_query' => [],
             'cache_results' => false,
